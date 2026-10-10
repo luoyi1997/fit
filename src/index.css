@@ -5,15 +5,28 @@
   --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
 
-  /* 运动活力风品牌色板 */
-  --color-brand-lime: #a3e635;        /* 荧光青柠（主高亮） */
-  --color-brand-lime-soft: #ecfccb;   /* 青柠浅底 */
-  --color-brand-emerald: #10b981;     /* 翡翠绿（主色） */
-  --color-brand-emerald-deep: #047857;
-  --color-brand-orange: #f97316;      /* 活力橙（点缀） */
-  --color-brand-amber: #fbbf24;       /* 琥珀（暖点缀） */
-  --color-brand-ink: #081f18;         /* 深墨绿（顶栏底色） */
-  --color-brand-ink-soft: #0f2e23;
+  /* INTJ 浅系·方案1 色板 — WCAG 2.1 AA 低饱和强秩序感 */
+  --color-brand-primary: #2A4A44;            /* 主色·深墨绿 */
+  --color-brand-primary-hover: #345952;
+  --color-brand-primary-active: #24403B;
+  --color-brand-primary-disabled: #839692;
+  --color-brand-primary-soft: #E7EEEC;       /* 主色浅底 */
+  --color-brand-primary-light: #9DB8B1;      /* 主色浅亮（深底强调文字） */
+  --color-brand-accent: #423359;             /* 辅助强调·暗雾紫 */
+  --color-brand-accent-hover: #503F6B;
+  --color-brand-accent-active: #372A4A;
+  --color-brand-accent-soft: #EEEAf4;        /* 紫色浅底 */
+  --color-brand-page: #F7F8F9;               /* 页面背景 */
+  --color-brand-card: #FFFFFF;               /* 卡片/弹窗背景 */
+  --color-brand-text: #242930;               /* 正文 */
+  --color-brand-text-secondary: #5A6169;     /* 次要文字 */
+  --color-brand-text-placeholder: #8A9096;   /* 占位文字 */
+  --color-brand-border: #E3E6E9;             /* 边框分割线 */
+  --color-brand-success: #3A5F57;            /* 功能反馈·成功 */
+  --color-brand-warning: #61523E;            /* 功能反馈·警告 */
+  --color-brand-warning-soft: #F1EDE4;
+  --color-brand-danger: #543842;             /* 功能反馈·危险 */
+  --color-brand-danger-soft: #F1E9EC;
 }
 
 :root {
@@ -23,11 +36,11 @@
 body {
   margin: 0;
   background:
-    radial-gradient(120% 60% at 85% -10%, rgba(163, 230, 53, 0.14) 0%, transparent 55%),
-    radial-gradient(100% 50% at 0% 0%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, #f5fdf3 0%, #f8fafc 42%, #fefaf3 100%);
+    radial-gradient(120% 70% at 85% -10%, rgba(42, 74, 68, 0.05) 0%, transparent 55%),
+    radial-gradient(90% 50% at 0% 0%, rgba(66, 51, 89, 0.04) 0%, transparent 50%),
+    #F7F8F9;
   background-attachment: fixed;
-  color: #1e293b;
+  color: #242930;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,13 +49,13 @@ body {
   min-height: 100svh;
 }
 
-/* 文本选中高亮 — 品牌色 */
+/* 文本选中高亮 — 主色浅底 */
 ::selection {
-  background: rgba(163, 230, 53, 0.35);
-  color: #14532d;
+  background: rgba(42, 74, 68, 0.18);
+  color: #1d3531;
 }
 
-/* 滚动条 — 荧光绿→橙渐变 */
+/* 滚动条 — 主色→紫克制渐变 */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -52,21 +65,28 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #a3e635, #f97316);
+  background: linear-gradient(180deg, rgba(42, 74, 68, 0.5), rgba(66, 51, 89, 0.5));
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #84cc16, #ea580c);
+  background: linear-gradient(180deg, #2A4A44, #423359);
 }
 
-/* ---- 轻量动效 ---- */
+/* ---- 无障碍：Tab 可见焦点环（主色） ---- */
+:focus-visible {
+  outline: 2px solid #2A4A44;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
 
-/* 进入动画：fade + 上移 */
+/* ---- 轻量动效（克制） ---- */
+
+/* 进入动画：淡入 + 轻微上移 */
 @keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -75,14 +95,14 @@ body {
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.45s ease-out both;
+  animation: fade-in-up 0.28s ease-out both;
 }
 
 /* 卡片展开/收起：grid-rows 0fr → 1fr 平滑过渡（纯 CSS，无 JS 测量高度） */
 .expand-grid {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.32s ease;
+  transition: grid-template-rows 0.24s ease;
 }
 
 .expand-grid.open {
@@ -93,37 +113,37 @@ body {
   overflow: hidden;
 }
 
-/* ---- 品牌工具类（补充 Tailwind 无法内联表达的渐变） ---- */
+/* ---- 品牌工具类（INTJ 浅系主色/紫色） ---- */
 
-/* 渐变文字：青柠 → 翡翠 → 橙 */
+/* 渐变文字：深墨绿 → 暗雾紫 */
 .brand-gradient-text {
-  background-image: linear-gradient(90deg, #a3e635 0%, #10b981 45%, #f97316 100%);
+  background-image: linear-gradient(90deg, #2A4A44 0%, #423359 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* 渐变背景：荧光绿 → 橙 */
+/* 渐变背景：深墨绿主色 */
 .brand-gradient-bg {
-  background-image: linear-gradient(135deg, #a3e635 0%, #84cc16 50%, #f97316 125%);
+  background-image: linear-gradient(135deg, #2A4A44 0%, #345952 100%);
 }
 
 /* 顶栏深墨绿渐变 */
 .brand-header-bg {
   background-image:
-    radial-gradient(130% 170% at 12% 0%, #123b2e 0%, #0b2a20 48%, #051510 100%);
+    radial-gradient(130% 170% at 12% 0%, #345952 0%, #2A4A44 55%, #24403B 100%);
 }
 
-/* 胶囊激活态：荧光绿 → 橙 */
+/* 胶囊激活态：主色实底 */
 .brand-pill-active {
-  background-image: linear-gradient(135deg, #a3e635 0%, #84cc16 55%, #f97316 135%);
+  background-image: linear-gradient(135deg, #2A4A44 0%, #345952 100%);
 }
 
-/* 卡片展开详情内容淡入（展开区域内部内容出现时更柔和） */
+/* 卡片展开详情内容淡入 */
 @keyframes detail-fade-in {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
@@ -132,5 +152,24 @@ body {
 }
 
 .expand-grid.open .expand-grid-inner > div {
-  animation: detail-fade-in 0.3s ease-out 0.12s both;
+  animation: detail-fade-in 0.2s ease-out 0.1s both;
+}
+
+/* ---- 搜索命中高亮（辅助强调紫，区别于知识库原生主色高亮） ---- */
+.search-highlight {
+  background: rgba(66, 51, 89, 0.13);
+  color: #372A4A;
+  border-radius: 3px;
+  padding: 0 2px;
+  font-weight: 600;
+}
+
+/* ---- 减动效适配：尊重 prefers-reduced-motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
