@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  // GitHub Pages 子路径部署：仓库 12ASIR/fitness-app 将发布到 https://12ASIR.github.io/fitness-app/
-  base: '/fitness-app/',
+  // GitHub Pages 子路径部署：仓库 luoyi1997/fit 将发布到 https://luoyi1997.github.io/fit/
+  base: '/fit/',
   plugins: [react(), tailwindcss()],
 })
 
